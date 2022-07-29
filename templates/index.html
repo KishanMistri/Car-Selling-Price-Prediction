@@ -10,40 +10,74 @@
 <body>
     <div style="color:rgb(252, 252, 253)">
         <form action="{{ url_for('predict')}}" method="post">
-            <h3>Get Estimated Sell price</h3>
-             <div style="width: 100%; overflow: hidden;">
-                <div style="margin-left: 300px; width: 500px; float: left;"> 
-                    <h4>Year</h4> <id="first" name="Year" type="number ">
-
-                    <h4>What is the Showroom Price?(In lakhs)</h4><input id="second" name="Present_Price" required="required">
+            <h2 style="color: #e8f8f8;">Get Estimated Sell price</h2>
+            <h4>Year bought</h4> <input id="text_inputs" name="Year" type="number ">
+            
+            <h4>What is the current Showroom Price? (In lakhs)</h4> <input id="text_inputs" name="Present_Price" required="required">
                     
-                    <h4>What Is the Fuel type?</h4><select name="Fuel_Type_Petrol" id="fuel" required="required">
-                                                        <option value="Petrol">Petrol</option>
-                                                        <option value="Diesel">Diesel</option>
-                                                        <option value="CNG">CNG</option>
-                                                    </select>
+            <h4>How Many Kilometers Drived?</h4><input id="text_inputs" name="Kms_Driven" required="required">
+                
+            <div style="width: 100%; overflow: hidden;">
+                <div style="float:left; width: 50%; overflow: hidden;">
+                    <div style="width: 100%; overflow: hidden;">
+                        <div style="float:left;margin-left: 350px;"> 
+                            <h4>Transmission type</h4>
+                        </div>
+                        <div style="float:right; margin-right: 100px; margin-top:5px"> 
+                            <select name="Transmission_Manual" id="dropdown_select" required="required">
+                                <option value="Manual">Manual</option>
+                                <option value="Automatic">Automatic</option>
+                            </select>
+                        </div>
+                    </div>
 
-                    <h4>Are you A Dealer or Individual</h4><select name="Seller_Type_Individual" id="research" required="required">
-                                                                <option value="Dealer">Dealer</option>
-                                                                <option value="Individual">Individual</option>
-                                                            </select> 
-                </div>
-            <div style="margin-right: 300px;"> 
-                    <h4>How Many Kilometers Drived?</h4><input id="third" name="Kms_Driven" required="required">
-
-                    <h4>How much owners previously had the car(0 or 1 or 3) ?</h4><input id="fourth" name="Owner" required="required"> 
-
-                    <h4>Transmission type</h4><select name="Transmission_Mannual" id="research" required="required">
-                                                    <option value="Mannual">Manual Car</option>
-                                                    <option value="Automatic">Automatic Car</option>
-                                                </select>
+                    <div style="width: 100%; overflow: hidden;">
+                        <div style=" float: left;"> 
+                            <h4 style="margin-left: 350px;">What Is the Fuel type?</h4>
+                        </div>
+                        <div style="float:right; margin-right: 100px; margin-top: 5px"> 
+                            <select name="Fuel_Type_Petrol" id="dropdown_select" required="required">
+                                <option value="Petrol">Petrol</option>
+                                <option value="Diesel">Diesel</option>
+                                <option value="CNG">CNG</option>
+                            </select>
+                        </div>
+                    </div>
+                </div> 
+                <div style="float:right; width: 50%; overflow: hidden;">
+                    <div style="width: 100%; overflow: hidden;">
+                        <div style="float:left; text-align: left;"> 
+                            <h4>Are you A Dealer or Individual?</h4>
+                        </div>
+                        <div style="float:right;margin-right: 250px;"> 
+                            <select name="Seller_Type_Individual" id="dropdown_select" required="required">
+                                <option value="Dealer">Dealer</option>
+                                <option value="Individual">Individual</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div style="width: 100%; overflow: hidden;">
+                        <div style=" float: left; text-align: left;"> 
+                            <h4>How many owners the car(0 or 1 or 3) had previously?</h4>
+                        </div>
+                        <div style="float:right; margin-right: 250px;"> 
+                            <select name="Owner" id="dropdown_select" required="required">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
-            
-            <button id="sub" type="submit ">Get Selling Price</button>
-            
+        
+            <br/><button id="sub" type="submit">Get Selling Price</button>    
+
         </form>
-        <br><h4>{{ prediction_text }}<h4>
+        
+        <h4>{{prediction_text}}</h4>
+
     </div>
     <style>
         body {
@@ -52,15 +86,15 @@
             padding: 0px;
         }
         
-        #research {
-            font-size: 15px;
-            width: 100px;
-            height: 23px;
-            top: 23px;
-        }
-        
         h4 {
             line-height: 0px;
+        }
+
+        #text_inputs {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 12px;
+            text-align: center;
         }
 
         #box {
@@ -81,19 +115,7 @@
             font-size: 14px;
         }
         
-        #fuel {
-            width: 83px;
-            height: 43px;
-            text-align: center;
-            border-radius: 14px;
-            font-size: 18px;
-        }
-        
-        #fuel:hover {
-            background-color: rgb(80, 205, 255);
-        }
-        
-        #research {
+        #dropdown_select {
             width: 99px;
             height: 43px;
             text-align: center;
@@ -101,22 +123,10 @@
             font-size: 18px;
         }
         
-        #research:hover {
+        #dropdown_select:hover {
             background-color: rgb(80, 249, 255);
         }
-        
-        #resea {
-            width: 99px;
-            height: 43px;
-            text-align: center;
-            border-radius: 14px;
-            font-size: 18px;
-        }
-        
-        #resea:hover {
-            background-color: rgb(80, 191, 255);
-        }
-        
+                
         #sub {
             width: 112px;
             height: 43px;
@@ -128,35 +138,6 @@
         #sub:hover {
             background-color: rgb(16, 139, 0);
         }
-        
-        #first {
-            border-radius: 14px;
-            height: 25px;
-            font-size: 12px;
-            text-align: center;
-        }
-        
-        #second {
-            border-radius: 14px;
-            height: 25px;
-            font-size: 12px;
-            text-align: center;
-        }
-        
-        #third {
-            border-radius: 14px;
-            height: 25px;
-            font-size: 12px;
-            text-align: center;
-        }
-        
-        #fourth {
-            border-radius: 14px;
-            height: 25px;
-            font-size: 12px;
-            text-align: center;
-        }
     </style>
 </body>
-
 </html>
