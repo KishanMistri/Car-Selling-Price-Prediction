@@ -8,7 +8,7 @@ from datetime import date
 from sklearn.preprocessing import StandardScaler
 
 app = Flask(__name__)
-model = joblib.load(open('rf_saved_model.pkl', 'rb'))
+model = joblib.load('rf_saved_model.pkl')
 @app.route('/',methods=['GET'])
 def Home():
     return render_template('index.html')
